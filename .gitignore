@@ -4,8 +4,7 @@ venv_new/
 env/
 ENV/
 .venv/
-ps/
-twins/
+rawcsv/
 
 # Python
 __pycache__/
