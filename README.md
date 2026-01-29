@@ -15,8 +15,6 @@ The project focuses on pressure, temperature, and wind measurements, with the lo
 
 All data originates from NASA’s **InSight lander** surface instruments:
 
-https://atmos.nmsu.edu/data_and_services/atmospheres_data/INSIGHT/insight.html#Data
-
 - **PS (Pressure Sensor)**  
   Measures atmospheric pressure on Mars.
 
