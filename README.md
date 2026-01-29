@@ -1,9 +1,10 @@
 # Mars Surface Weather Data Analysis
 
-![Python](https://img.shields.io/badge/Python-3.x-blue)
-![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange)
-![Data Source](https://img.shields.io/badge/Data-NASA%20InSight-red)(https://atmos.nmsu.edu/data_and_services/atmospheres_data/INSIGHT/insight.html#Data)
-![Status](https://img.shields.io/badge/Project-Active-success)
+[![Python](https://img.shields.io/badge/Python-3.x-blue)](https://www.python.org/)
+[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange)](https://jupyter.org/)
+[![Data Source](https://img.shields.io/badge/Data-NASA%20InSight-red)](https://atmos.nmsu.edu/data_and_services/atmospheres_data/INSIGHT/insight.html#Data)
+[![Status](https://img.shields.io/badge/Project-Active-success)](#)
+
 
 This repository contains processed and raw atmospheric data collected on the Martian surface by NASA instruments.  
 The project focuses on pressure, temperature, and wind measurements, with the long-term goal of identifying significant atmospheric events and evaluating machine learning approaches for automated detection.
