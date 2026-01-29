@@ -61,11 +61,9 @@ Subdirectories correspond to individual instruments:
 
 This Jupyter notebook serves as the primary data processing pipeline. It performs:
 
-1. Cleaning and calibration of raw instrument data  
+1. Cleaning of raw instrument data  
 2. Temporal alignment of measurements  
 3. Conversion into human-readable, minute-averaged CSV files  
-
-The notebook produces intermediate outputs to allow manual verification of data integrity prior to final aggregation.
 
 ---
 
@@ -87,18 +85,7 @@ The following CSV files are generated when `ConfigureCSV.ipynb` is executed:
 ## Visualizations
 
 - **`pressure and temperature vs time.png`**  
-  A validation plot illustrating the temporal relationship between pressure and temperature, used to confirm expected physical behavior and data continuity.
-
----
-
-## Research Objectives
-
-The primary research objectives of this project are to:
-
-- Identify rapid atmospheric pressure drops  
-- Characterize temperature fluctuations over time  
-- Investigate correlations between pressure, temperature, and wind behavior  
-- Evaluate machine learning techniques for automated event detection in Martian atmospheric data  
+  A validation plot illustrating the relationship between pressure and temperature
 
 ---
 
@@ -108,10 +95,3 @@ The primary research objectives of this project are to:
 - [ ] Add labels for significant temperature fluctuations  
 - [ ] Research and compare machine learning models suitable for time-series anomaly detection  
 - [ ] Develop and train a model to identify atmospheric events automatically  
-
----
-
-## Notes
-
-This repository is intended for exploratory data analysis, validation, and methodological development.  
-The processed datasets are structured to support both traditional statistical analysis and machine learning workflows.
