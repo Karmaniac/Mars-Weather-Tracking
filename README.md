@@ -1,4 +1,4 @@
-# Mars Surface Weather Data Analysis
+# Storm Chasing on Mars
 
 [![Python](https://img.shields.io/badge/Python-3.x-blue)](https://www.python.org/)
 [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange)](https://jupyter.org/)
