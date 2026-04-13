@@ -34,7 +34,11 @@ Thumbs.db
 # *.csv
 # *.xlsx
 # *.json
-# *.parquet
+*.parquet
+
+
+#subfolders
+data/
 
 # Environment variables
 .env

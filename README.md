@@ -1,97 +1,39 @@
-# Storm Chasing on Mars
+# InSight Mars Weather Forecaster
 
-[![Python](https://img.shields.io/badge/Python-3.x-blue)](https://www.python.org/)
-[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange)](https://jupyter.org/)
-[![Data Source](https://img.shields.io/badge/Data-NASA%20InSight-red)](https://atmos.nmsu.edu/data_and_services/atmospheres_data/INSIGHT/insight.html#Data)
-[![Status](https://img.shields.io/badge/Project-Active-success)](#)
+An LSTM that predicts atmospheric pressure and temperature 60 minutes ahead using NASA InSight lander sensor data.
 
+## Pipeline
 
-This repository contains processed and raw atmospheric data collected on the Martian surface by NASA instruments.  
-The project focuses on pressure, temperature, and wind measurements, with the long-term goal of identifying significant atmospheric events and evaluating machine learning approaches for automated detection.
+Run the four scripts in order:
 
----
+```bash
+python download.py   # Fetch TWINS and PS CSVs from NMSU PDS archive
+python process.py    # Merge and minute-average into a single parquet file
+python prepare.py    # Normalize, split, and build sliding-window arrays
+python train.py      # Train the LSTM and evaluate on the test set
+```
 
-## Data Sources
+## Data
 
-All data originates from NASA’s **InSight lander** surface instruments:
+- **TWINS** — wind speed, air temperature, rod temperature
+- **PS** — atmospheric pressure and pressure temperature
+- Sourced from the [NMSU PDS InSight archive](https://atmos.nmsu.edu/PDS/data/PDS4/InSight/)
 
-- **PS (Pressure Sensor)**  
-  Measures atmospheric pressure on Mars.
+## Model
 
-- **TWINS (Temperature and Wind for InSight)**  
-  Measures:
-  - Air temperature  
-  - Wind speed and direction  
+A 2-layer stacked LSTM (256 hidden units) trained with a 120-minute input window to predict 60 minutes ahead. Targets: `PRESSURE` and `BMY_AVE_ROD_TEMP`.
 
----
+## Outputs
 
-## Repository Structure
-├── rawcsv/  
-│ ├── ps/ # Raw pressure sensor CSV data  
-│ └── twins/ # Raw temperature and wind CSV data  
-│  
-├── ConfigureCSV.ipynb  
-├── combined_minute_avg.csv  
-├── ps_calib_minute_avg.csv  
-├── twins_calib_minute_avg.csv  
-│  
-├── pressure and temperature vs time.png  
-└── README.md  
+| Path | Description |
+|------|-------------|
+| `data/raw/` | Downloaded CSVs |
+| `data/processed/` | Merged parquet, scaled arrays, scaler params |
+| `models/best_model.pt` | Best checkpoint by validation loss |
+| `models/training_curve.png` | Loss plot |
 
+## Requirements
 
----
-
-## Raw Data
-
-The `rawcsv/` directory contains approximately **120 days of raw CSV data** used for:
-
-- Data validation  
-- Pipeline testing  
-- Calibration and aggregation verification  
-
-Subdirectories correspond to individual instruments:
-- `ps/` → Pressure sensor data  
-- `twins/` → Temperature and wind data  
-
----
-
-## Data Processing Pipeline
-
-### `ConfigureCSV.ipynb`
-
-This Jupyter notebook serves as the primary data processing pipeline. It performs:
-
-1. Cleaning of raw instrument data  
-2. Temporal alignment of measurements  
-3. Conversion into human-readable, minute-averaged CSV files  
-
----
-
-## Generated Data Products
-
-The following CSV files are generated when `ConfigureCSV.ipynb` is executed:
-
-- **`ps_calib_minute_avg.csv`**  
-  Minute-averaged and calibrated pressure data
-
-- **`twins_calib_minute_avg.csv`**  
-  Minute-averaged and calibrated temperature and wind data
-
-- **`combined_minute_avg.csv`**  
-  **Final cleaned dataset** combining pressure, temperature, and wind measurements into a single, analysis-ready file
-
----
-
-## Visualizations
-
-- **`pressure and temperature vs time.png`**  
-  A validation plot illustrating the relationship between pressure and temperature
-
----
-
-## Future Work
-
-- [ ] Add labels for rapid pressure drop events  
-- [ ] Add labels for significant temperature fluctuations  
-- [ ] Research and compare machine learning models suitable for time-series anomaly detection  
-- [ ] Develop and train a model to identify atmospheric events automatically  
+```bash
+pip install requests beautifulsoup4 pandas numpy pyarrow torch matplotlib
+```
